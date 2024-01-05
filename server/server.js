@@ -1,11 +1,13 @@
 const express = require('express');
 const app = express();
-const PORT = 3001; 
+const path=require('path')
 
-app.get('/', (req, res) => {
-    res.send('Hello, this is your Express server!');
-});
+const RouterHome=require('./routers/home.router')
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+app.use(express.static(path.join(__dirname,'assets')))
+app.set('view engine','ejs')
+app.set('views','views')
+
+app.use('/',RouterHome)
+
+app.listen(3001,()=>console.log('server running'))
